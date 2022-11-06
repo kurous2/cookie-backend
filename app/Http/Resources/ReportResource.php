@@ -12,7 +12,7 @@ class ReportResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    protected $fillable = ['title','category','location','target_donation','due_date', 'status'];
+
     public function toArray($request)
     {
         return [
@@ -23,6 +23,11 @@ class ReportResource extends JsonResource
             'target_dontaion' => $this->target_donation,
             'due_date' => $this->due_date,
             'status' => $this->status,
+            'description' => $this->description,
+            'user' => new UserResource($this->user),
+            'community' => new CommunityResource($this->community),
+            'pic_name' => $this->pic_name,
+            'docs' => $this->docs,
             'created_at' => $this->created_at
         ];
     }
