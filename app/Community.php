@@ -3,19 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Community extends Model
 {
     //
+    //
     protected $table = "communities";
 
-    protected $fillable = ['name','email','password','stamp','is_verified'];
+    protected $fillable = ['stamp','is_verified','user_id'];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    public function report(){
+    public function users(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
+    
+    public function reports(){
         return $this->hasMany('App\Report');
     }
+
+  
 }

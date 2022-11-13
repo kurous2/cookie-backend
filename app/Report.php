@@ -24,19 +24,19 @@ class Report extends Model
     ];
 
     public function images(){
-        return $this->hasMany('App\ReportImage');
+        return $this->hasMany('App\ReportImage', 'report_id');
     }
 
-    public function donate(){
-        return $this->hasMany('App\Donation');
+    public function donates(){
+        return $this->hasMany('App\Donation', 'report_id');
     }
     
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function users(){
+        return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function community(){
-        return $this->belongsTo('App\Community');
+    public function communities(){
+        return $this->belongsTo('App\Community', 'community_id');
     }
 
 }

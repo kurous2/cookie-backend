@@ -16,8 +16,8 @@ class DonationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
-            'report' => new ReportResource($this->report),
+            'user' => new UserResource($this->users),
+            'report' => new ReportResource($this->reports),
             'amount' => $this->amount,
             'created_at' => $this->created_at
         ];
