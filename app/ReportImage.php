@@ -11,7 +11,7 @@ class ReportImage extends Model
 
     protected $fillable = ['report_id','image'];
 
-    public function report(){
-        return $this->belongsTo('App\Report');
+    public function reports(){
+        return $this->belongsTo('App\Report', 'report_id');
     }
 }

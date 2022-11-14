@@ -11,11 +11,11 @@ class Donation extends Model
 
     protected $fillable = ['user_id','report_id','amount'];
 
-    public function user(){
-        return $this->belongsTo('App\User');
+    public function users(){
+        return $this->belongsTo('App\User', 'user_id');
     }
 
-    public function report(){
-        return $this->belongsTo('App\Report');
+    public function reports(){
+        return $this->belongsTo('App\Report', 'report_id');
     }
 }

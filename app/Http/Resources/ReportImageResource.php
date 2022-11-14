@@ -17,7 +17,7 @@ class ReportImageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'report' => new ReportResource($this->report),
+            'report' => new ReportResource($this->reports),
             'image' => $this->amount,
             'created_at' => $this->created_at
         ];

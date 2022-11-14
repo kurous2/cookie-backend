@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
+// use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CommunityResource extends ResourceCollection
+class CommunityResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -12,15 +13,18 @@ class CommunityResource extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    protected $fillable = ['name','email','password','stamp','is_verified'];
+
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'stamp' => $this->stamp,
+            'community_id' => $this->id,
             'is_verified' => $this->is_verified,
+            'stamp' => $this->stamp,
+            // 'user_id' => $this->user_id,
+            'user_id' => $this->users->id,
+            'name' => $this->users->name,
+            'email' => $this->users->email,
+            'role' => $this->users->role,
             'created_at' => $this->created_at
         ];
     }

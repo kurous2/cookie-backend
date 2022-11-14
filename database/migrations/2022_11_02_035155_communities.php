@@ -15,13 +15,9 @@ class Communities extends Migration
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_verified')->default(0);
-            $table->string('stamp');
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('stamp')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
