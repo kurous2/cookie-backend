@@ -55,6 +55,13 @@ Route::prefix('activities',
     // Route::post('', 'ReportController@store');
 });
 
+Route::prefix('usign',
+['middleware' => 'api'])->group(function () {
+    Route::post('/getToken', 'UsignController@getToken');
+    Route::post('/signDocs/{id}', 'UsignController@signDocument');
+    // Route::post('', 'ReportController@store');
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

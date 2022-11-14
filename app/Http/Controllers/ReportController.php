@@ -59,7 +59,6 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-       
         if(Gate::denies('user')){
             return response()->json([
                 'code' => 403,
@@ -150,8 +149,6 @@ class ReportController extends Controller
     }
 
     public function destroy($id){
-        
-      
         try {
             $report = Report::findOrFail($id);
            
