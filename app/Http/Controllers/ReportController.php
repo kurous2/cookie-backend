@@ -70,7 +70,7 @@ class ReportController extends Controller
             'description' => 'required|string',
             'category' => 'required|string',
             'location' => 'required|string',
-            'due_date' => 'required|string',
+            'due_date' => 'nullable|string',
             'docs' => 'nullable|string',
             'init_donation' => 'nullable|string',
             
@@ -123,9 +123,6 @@ class ReportController extends Controller
         ]);
         // dd($request->target_donation);
     
-
-      
-            $report = Report::findOrFail($id);
             $total = Donation::where('report_id','=',$report->id)->get()->sum('amount');
             $report->community_id = $community->id;
             $report->pic_name = $request->pic_name;
@@ -137,6 +134,41 @@ class ReportController extends Controller
             $report->save();
             // dd($report);
             return new ReportResource($report);
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'Not Found',
+                'description' => 'Report ' . $id . ' not found.'
+            ], 404);
+        }
+
+    }
+
+    public function finishReport($id)
+    {
+        //
+        try {
+        if(Gate::denies('verified')){
+            return response()->json([
+                'code' => 403,
+                'message' => 'Forbidden'
+            ],403);
+        }
+        $report = Report::findOrFail($id);
+        if($report == null)
+            throw new ModelNotFoundException('Report with ID ' . $id . ' Not Found', 0);
+ 
+        // dd($request->target_donation);
+            $report = Report::findOrFail($id);
+            $report->status = "completed";
+            $report->save();
+            // dd($report);
+            return response()->json([
+                'code' => 201,
+                'message' => 'Successfully Finish Report',
+                'data' => new ReportResource($report)
+            ],201);
 
         } catch (ModelNotFoundException $e) {
             return response()->json([

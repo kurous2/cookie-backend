@@ -47,6 +47,7 @@ Route::prefix('reports',
     Route::post('', 'ReportController@store');
     Route::patch('/takeReport/{id}', 'ReportController@takeReport');
     Route::delete('{id}', 'ReportController@destroy');
+    Route::patch('/finishReport/{id}', 'ReportController@finishReport');
 });
 
 Route::prefix('activities',
